@@ -1,0 +1,35 @@
+digraph modules {
+    node [shape=box]
+    
+    start [label="Are students interested in network engineering?"]
+    int_dns [label="Are students interested in understanding DNS?"]
+    int_web [label="Are students interested in Web development?"]
+    exper_dns [label="Are students have knowledge and experience related to DNS?"]
+    exper_web [label="Are students have knowledge and experience related to web?"]
+    tcp [label="Do students need foundational network programming?"]
+    switch [label="Are students have knowledge and experience with Switch."]
+    mininet [label="Do students have experience with network simulation tools?"]
+
+    module1 [label="Module 1: TCP Server/Client"]
+    module2 [label="Module 2: Switch Implementation"]
+    module3 [label="Module 3: DNS Server Implementation"]
+    module4 [label="Module 4: Web Server Frontend and Backend Implementation"]
+    module5 [label="Module 5: Mininet Implementation"]
+    
+    start -> exper_dns [label="No"]
+    exper_dns -> module3 [label="Yes"]
+    exper_dns -> exper_web
+    exper_web -> module4 [label="Yes"]
+
+    start -> tcp [label="Yes"]
+    tcp -> module1 [label="Yes"]
+    tcp -> int_dns
+    int_dns -> module3 [label="Yes"]
+    int_dns -> int_web
+    int_web -> module4 [label="Yes"]
+    
+    tcp -> switch [label="No"]
+    switch -> module2 [label="Yes"]
+
+    mininet -> module5 [label="Yes"]
+}

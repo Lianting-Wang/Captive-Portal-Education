@@ -1,0 +1,43 @@
+digraph {
+    node [shape=box]
+    start [label="Packet Sent From"]
+    
+    captive_portal [label="Captive Portal"]
+    internet [label="Internet"]
+    other [label="Other Devices"]
+    
+    check_valid_1_1 [label="Whether the user is authenticated?"]
+    check_valid_1_2 [label="Whether the user is authenticated?"]
+    check_valid_2 [label="Whether the user is authenticated?"]
+    
+    // condition2 [label="packet.dst != self.internet_mac and self.check_valid(packet.dst)?"]
+    
+    drop_1 [label="Drop Package"]
+    set_mod_1 [label="Send to corresponding port"]
+
+    // condition4 [label="packet.dst != self.captive_portal_mac and not self.check_valid(packet.dst)?"]
+    
+    drop_2 [label="Drop Packag"]
+    set_mod_2 [label="Send to corresponding port"]
+
+    set_mod3 [label="Send to internet port"]
+    set_mod4 [label="Send to captive portal port"]
+    
+    start -> captive_portal
+    start -> internet
+    start -> other
+    other -> check_valid_2
+    check_valid_2 -> set_mod3 [label="True"]
+    check_valid_2 -> set_mod4 [label="False"]
+    
+    captive_portal -> set_mod_1 [label="Send to Internet"]
+    captive_portal -> check_valid_1_1 [label="Send to Others"]
+    internet -> set_mod_2 [label="Send to Captive Portal"]
+    internet -> check_valid_1_2 [label="Send to Others"]
+    
+    check_valid_1_1 -> drop_1 [label="True"]
+    check_valid_1_1 -> set_mod_1 [label="False"]
+    
+    check_valid_1_2 -> drop_2 [label="False"]
+    check_valid_1_2 -> set_mod_2 [label="True"]
+}

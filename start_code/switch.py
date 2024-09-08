@@ -3,7 +3,7 @@ from pox.core import core
 import pox.openflow.libopenflow_01 as of
 from pox.lib.util import str_to_bool
 from pox.lib.addresses import EthAddr
-from tcp_client import tcp_client
+from tcp_client import TCPClient
 
 log = core.getLogger()
 
@@ -19,7 +19,7 @@ class LearningSwitch(object):
         # Listen to the connection
         connection.addListeners(self)
 
-        self.tcp_client = tcp_client()
+        self.tcp_client = TCPClient()
         self.captive_portal_mac = EthAddr(self.tcp_client.get_host()['result'])
         self.internet_mac = EthAddr(self.tcp_client.get_internet()['result'])
 

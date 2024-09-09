@@ -9,7 +9,7 @@ mkdir -p ~/Captive-Portal
 cd ~/Captive-Portal || exit
 
 # Download and unzip the archive
-curl -L -o Captive-Portal.zip https://github.com/Lianting-Wang/Captive-Portal-Test/archive/refs/heads/main.zip
+curl -L -o Captive-Portal.zip https://github.com/Lianting-Wang/Captive-Portal-Education/archive/refs/heads/main.zip
 unzip -o Captive-Portal.zip
 rm Captive-Portal.zip
 
